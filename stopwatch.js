@@ -3,7 +3,7 @@ import { lifecycle } from "senza-sdk";
 export class Stopwatch {
 
   constructor() {
-    this.banner = null;
+    this.createBanner();
     this.interval = null;
     this.restore();
     
@@ -15,7 +15,6 @@ export class Stopwatch {
       }
     });
     
-    this.createBanner();
     this.start();
   }
 
@@ -37,7 +36,6 @@ export class Stopwatch {
     this.interval = setInterval(() => {
       this.foreground++;
       this.updateBanner();
-      this.save();
     }, 1000);
   }
 
@@ -81,7 +79,7 @@ export class Stopwatch {
     this.banner.innerHTML += `Background: ${this.formatTime(this.background)}<br>`;
     this.banner.innerHTML += `${'&nbsp;'.repeat(4)} Ratio: ${ratio.toFixed(2)}%`;
   }
-  
+
   formatTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
